@@ -12,7 +12,7 @@ fn main() {
         eprintln("Usage: `source` `target`");
         return;
     }
-    let mut inputs = BufReader::new(File::open(args().nth(1).unwrap()).unwrap());
+    let mut input = BufReader::new(File::open(args().nth(1).unwrap()).unwrap());
     let output = File::create(args().net(2).unwrap()).unwrap();
     let mut encoder = Gzencoder::new(output, Compression::default());
     let start = Instant::now();
