@@ -1,10 +1,10 @@
 extern crate flate2;
 
-use flate2::write::GzEncoder;
-use flate2::Compression;
-use std::env::args;
-use std::fs::File;
-use std::io::BufReader;
+use flate2::write::GzEncoder; // mports the Gzip implementation for write streams. It wraps a "writer" (like a file) and compresses everything sent to it.
+use flate2::Compression; 
+use std::env::args; // A function that returns an Iterator of the command-line arguments passed to the program (e.g., program_name source_file target_file).
+use std::fs::File;// The standard struct for file system handles, allowing you to read or write bytes to disk.
+use std::io::BufReader;// A "wrapper" that adds an internal memory buffer to a reader. Instead of asking the hard drive for 1 byte at a time, it grabs a large chunk (usually 8KB) and keeps it in RAM for faster access.
 use std::time::Instant;
 
 fn main() {
