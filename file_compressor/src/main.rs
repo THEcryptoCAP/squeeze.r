@@ -23,7 +23,10 @@ fn main() {
     // t takes the output file and wraps it. Any data you "write" to encoder gets squeezed by the Gzip algorithm before being handed off to the output file.
     let start = Instant::now(); // "Starts the stopwatch" right before the heavy lifting begins.
     copy(&mut input, &mut encoder).unwrap();
-    let output = encoder.finish().unwrap();
+   // this is the loop engine. It reads bytes from input (the source) and writes them to encoder (the Gzip stream). It continues until the end of the source file.
+    let output = encoder.finish().unwrap(); 
+    //Method: .finish()
+    //Role: This is vital. It tells the encoder "I'm done." The encoder then writes the Gzip footer (checksums and sizes) and returns the ownership of the inner output file so you can inspect it.
     println!(
         "Source len: {:?}",
         input.get_ref().metadata.unwrap.len();
