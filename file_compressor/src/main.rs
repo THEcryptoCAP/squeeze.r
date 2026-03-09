@@ -6,13 +6,18 @@ use std::env::args; // A function that returns an Iterator of the command-line a
 use std::fs::File;// The standard struct for file system handles, allowing you to read or write bytes to disk.
 use std::io::BufReader;// A "wrapper" that adds an internal memory buffer to a reader. Instead of asking the hard drive for 1 byte at a time, it grabs a large chunk (usually 8KB) and keeps it in RAM for faster access.
 use std::time::Instant;
+// Object: Instant
+//Role: A monotonically increasing timer used to measure elapsed time (like a stopwatch).
 
 fn main() {
     if args().len() != 3{
+        // Checks if the user provided exactly two arguments (plus the program name). If not, it prints a usage error to stderr and exits.
         eprintln("Usage: `source` `target`");
         return;
     }
-    let mut input = BufReader::new(File::open(args().nth(1).unwrap()).unwrap());
+    let mut input = BufReader::new(File::open(args().nth(1).unwrap()).unwrap()); 
+    // First declares a mut var input because it changes as we read. opens the source file in read only mode , fetches the first argument from user input ad thenn umwrap helps in panicxking the function if the file doesn't exist or somwthimg crashed. 
+    
     let output = File::create(args().nth(2).unwrap()).unwrap();
     let mut encoder = GzEncoder::new(output, Compression::default());
     let start = Instant::now();
