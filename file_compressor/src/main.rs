@@ -18,9 +18,10 @@ fn main() {
     let mut input = BufReader::new(File::open(args().nth(1).unwrap()).unwrap()); 
     // First declares a mut var input because it changes as we read. opens the source file in read only mode , fetches the first argument from user input ad thenn umwrap helps in panicxking the function if the file doesn't exist or somwthimg crashed. 
     
-    let output = File::create(args().nth(2).unwrap()).unwrap();
-    let mut encoder = GzEncoder::new(output, Compression::default());
-    let start = Instant::now();
+    let output = File::create(args().nth(2).unwrap()).unwrap(); // File::create(...): Opens the target file in write-only mode. If it already exists, it is truncated (emptied).
+    let mut encoder = GzEncoder::new(output, Compression::default()); 
+    // t takes the output file and wraps it. Any data you "write" to encoder gets squeezed by the Gzip algorithm before being handed off to the output file.
+    let start = Instant::now(); // "Starts the stopwatch" right before the heavy lifting begins.
     copy(&mut input, &mut encoder).unwrap();
     let output = encoder.finish().unwrap();
     println!(
